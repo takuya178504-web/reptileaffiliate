@@ -8,6 +8,7 @@ from pathlib import Path
 RAKUTEN_APP_ID = os.environ["RAKUTEN_APP_ID"]
 RAKUTEN_AFFILIATE_ID = os.environ.get("RAKUTEN_AFFILIATE_ID", "")
 ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
+RAKUTEN_ACCESS_KEY = os.environ["RAKUTEN_ACCESS_KEY"]
 
 KEYWORDS = [
     "レオパードゲッコー ケージ",
@@ -24,15 +25,17 @@ KEYWORDS = [
 
 
 def fetch_rakuten_products(keyword, num=5):
-    url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706"
+    url = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260401"
     params = {
         "applicationId": RAKUTEN_APP_ID,
+        "accessKey": RAKUTEN_ACCESS_KEY,
         "affiliateId": RAKUTEN_AFFILIATE_ID,
         "keyword": keyword,
         "hits": num,
         "sort": "-reviewCount",
         "imageFlag": 1,
         "formatVersion": 2,
+        "format": "json",
     }
     resp = requests.get(url, params=params, timeout=10)
     data = resp.json()
