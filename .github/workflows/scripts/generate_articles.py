@@ -36,7 +36,7 @@ def fetch_rakuten_products(keyword, num=5):
     }
     resp = requests.get(url, params=params, timeout=10)
     data = resp.json()
-        print(f"APIレスポンス: {data}")
+    print(f"APIレスポンス: {data}")
     return data.get("Items", [])
 
 
