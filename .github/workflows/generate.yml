@@ -2,8 +2,8 @@ name: Generate Affiliate Articles
 
 on:
   schedule:
-    - cron: '0 15 * * 0'  # 毎週月曜0時(JST)に実行
-  workflow_dispatch:  # 手動実行も可能
+    - cron: '0 15 * * 0'
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -21,15 +21,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic requests
+        run: pip install anthropic
 
       - name: Generate articles
         env:
-          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
-          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
-          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python .github/workflows/scripts/generate_articles.py
+        run: python scripts/generate_articles.py
 
       - name: Commit and push
         run: |
