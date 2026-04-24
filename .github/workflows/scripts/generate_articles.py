@@ -37,7 +37,7 @@ def fetch_rakuten_products(keyword, num=5):
         "formatVersion": 2,
         "format": "json",
     }
-    headers = {"Referer": "https://github.com"}
+    headers = {"Referer": "https://takuya178504-web.github.io"}
     resp = requests.get(url, params=params, headers=headers, timeout=10)
     data = resp.json()
     print(f"APIレスポンス: {data}")
